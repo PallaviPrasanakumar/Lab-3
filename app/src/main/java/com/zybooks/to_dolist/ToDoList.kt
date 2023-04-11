@@ -6,7 +6,7 @@ const val FILENAME = "todolist.txt"
 
 data class Task(val name: String, val description: String){
     override fun toString(): String {
-        return "Task name: '$name', Task description: '$description')"
+        return "Task name: '$name', Task description: '$description'"
     }
 }
 

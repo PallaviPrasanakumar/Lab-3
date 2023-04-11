@@ -15,6 +15,7 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import kotlin.math.abs
+import androidx.appcompat.app.AlertDialog
 
 const val SHAKE_THRESHOLD = 500
 
@@ -112,8 +113,21 @@ class MainActivity : AppCompatActivity(), SensorEventListener, DeleteAllDialog.O
     }
 
     private fun clearButtonClick() {
-        val dialog = DeleteAllDialog()
-        dialog.show(supportFragmentManager, "warningDialog")
+        // Create a confirmation dialog
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Clear Task")
+        builder.setMessage("Are you sure you want to clear the To-Do List?")
+        builder.setPositiveButton("Yes") { _, _ ->
+            // Clear the TextView by setting its text to an empty string
+            val textView = findViewById<TextView>(R.id.item_list)
+            textView.text = ""
+            toDoList.clear()
+        }
+        builder.setNegativeButton("No", null)
+
+        // Show the dialog
+        val dialog = builder.create()
+        dialog.show()
     }
 
     private fun onClickSettings() {
