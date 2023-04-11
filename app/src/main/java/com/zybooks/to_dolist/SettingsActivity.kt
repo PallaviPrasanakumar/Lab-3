@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceFragmentCompat
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.SwitchPreferenceCompat
+import androidx.preference.ListPreference
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -25,8 +26,7 @@ class SettingsActivity : AppCompatActivity() {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
 
             val themePref: SwitchPreferenceCompat? = findPreference("dark_theme")
-            themePref?.setOnPreferenceChangeListener { preference, newValue ->
-
+            themePref?.setOnPreferenceChangeListener { _, newValue ->
                 // Turn on or off night mode
                 if (newValue == true) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)

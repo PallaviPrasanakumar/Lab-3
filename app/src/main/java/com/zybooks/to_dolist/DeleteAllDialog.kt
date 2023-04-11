@@ -13,17 +13,9 @@ class DeleteAllDialog: DialogFragment() {
 
     private lateinit var listener: OnYesClickListener
 
-    override fun onCreateDialog(savedInstanceState: Bundle?)
-            : Dialog {
-        val builder = AlertDialog.Builder(requireActivity())
-        builder.setTitle(R.string.delete_all_dialog)
-        builder.setMessage(R.string.delete_all_dialog_message)
-        builder.setPositiveButton(R.string.yes) { _, _ ->
-            listener.onYesClick()
-        }
-        builder.setNegativeButton(R.string.no, null)
-        return builder.create()
-    }
+
+
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

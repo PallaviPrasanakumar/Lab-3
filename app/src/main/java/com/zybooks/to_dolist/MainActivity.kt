@@ -20,7 +20,8 @@ const val SHAKE_THRESHOLD = 500
 
 class MainActivity : AppCompatActivity(), SensorEventListener, DeleteAllDialog.OnYesClickListener {
     private var toDoList = ToDoList(this)
-    private lateinit var itemEditText: EditText
+    private lateinit var taskNameText: EditText
+    private lateinit var taskDesText: EditText
     private lateinit var listTextView: TextView
 
     private lateinit var soundEffects: SoundEffects
@@ -33,7 +34,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener, DeleteAllDialog.O
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        itemEditText = findViewById(R.id.todo_item)
+        taskNameText = findViewById(R.id.task_name)
+        taskDesText = findViewById(R.id.task_description)
         listTextView = findViewById(R.id.item_list)
         findViewById<Button>(R.id.add_button).setOnClickListener { addButtonClick() }
         findViewById<Button>(R.id.settings_button).setOnClickListener { onClickSettings() }
@@ -74,16 +76,18 @@ class MainActivity : AppCompatActivity(), SensorEventListener, DeleteAllDialog.O
 
     private fun addButtonClick() {
         // Ignore any leading or trailing spaces
-        val item = itemEditText.text.toString().trim()
+        val name = taskNameText.text.toString().trim()
+        val description = taskDesText.text.toString().trim()
 
         // Clear the EditText so it's ready for another item
-        itemEditText.setText("")
+        taskNameText.setText("")
+        taskDesText.setText("")
 
         // Add the item to the list and display it
-        if (item.isNotEmpty()) {
+        if (name.isNotEmpty() && description.isNotEmpty()) {
             soundEffects.playTone()
 
-            toDoList.addItem(item)
+            toDoList.addItem(name, description)
             displayList()
         }
     }
